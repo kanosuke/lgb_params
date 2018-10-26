@@ -213,6 +213,46 @@ def set_reg_lambda_space(
     space["reg_lambda"] = label_space
 
 
+def get_colsample_bytree_space(
+    low=0.5,
+    high=1,
+):
+    return hp.uniform(
+        "colsample_bytree",
+        low,
+        high,
+        )
+
+
+def set_colsample_bytree_space(
+    space,
+    label_space=None,
+):
+    if label_space is None:
+        label_space = get_colsample_bytree_space()
+    space["colsample_bytree"] = label_space
+
+
+def get_subsample_space(
+    low=0.5,
+    high=1,
+):
+    return hp.uniform(
+        "subsample",
+        low,
+        high,
+        )
+
+
+def set_subsample_space(
+    space,
+    label_space=None,
+):
+    if label_space is None:
+        label_space = get_subsample_space()
+    space["subsample"] = label_space
+
+
 def get_simple_space():
     '''get simple space
         set below label_space
@@ -244,4 +284,6 @@ def get_standard_space():
     set_min_child_samples_space(space)
     set_reg_alpha_space(space)
     set_reg_lambda_space(space)
+    set_colsample_bytree_space(space)
+    set_subsample_space(space)
     return space
