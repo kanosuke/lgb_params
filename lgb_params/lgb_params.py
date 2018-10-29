@@ -253,6 +253,48 @@ def set_subsample_space(
     space["subsample"] = label_space
 
 
+def get_n_estimators_space(
+    low=500,
+    high=2000,
+    q=20,
+):
+    '''get space for n_estimators of quniform
+
+    keyword auguments:
+    low -- 7(default)
+    high -- 63(default)
+    q -- 1(default)
+
+    return:
+    space for n_estimators
+
+    '''
+    return get_quniform_space(
+        "n_estimators",
+        low,
+        high,
+        q,
+        )
+
+
+def set_n_estimators_space(
+    space,
+    label_space=None,
+):
+    '''set space for n_estimators
+
+    keyword auguments:
+    space -- space for set
+    label_space -- space of n_estimators (default=None)
+                   IF None : set space return of  get_n_estimators_space()
+    return: None
+
+    '''
+    if label_space is None:
+        label_space = get_n_estimators_space()
+    space["n_estimators"] = label_space
+
+
 def get_simple_space():
     '''get simple space
         set below label_space
@@ -280,6 +322,7 @@ def get_standard_space():
 
     '''
     space = get_default_params()
+    set_n_estimators_space(space)
     set_num_leaves_space(space)
     set_min_child_samples_space(space)
     set_reg_alpha_space(space)
